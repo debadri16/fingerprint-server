@@ -15,15 +15,10 @@ import stcet.group2020.fpr.repository.AdminRepository;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("admin")
-public class AdminController {
+@RequestMapping("student")
+public class StudentController {
 	
 	@Autowired
-	private AdminRepository adminRepository;
+	private AdminRepository studnetRepository;
 		
-	@GetMapping("/get")
-    public ArrayList<Admin> get(){
-        return (ArrayList<Admin>) adminRepository.findAll();
-    }
-
 }

@@ -1,18 +1,20 @@
 package stcet.group2020.fpr.model;
 
-import javax.persistence.Column;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Admin {
+@Table(name = "course")
+public class Course {
 	
 	@Id
 	@GeneratedValue()
-	@Column(name="id")
 	private long id;
 	
 	@NotNull
@@ -22,17 +24,30 @@ public class Admin {
 	private String department;
 	
 	@NotNull
-	private String minutiae;
-
-
-	public String getMinutiae() {
-		return minutiae;
+	private int classes;
+	
+	@OneToMany(mappedBy = "course")
+    private Set<Attendance> attendance; 
+	
+	public int getClasses() {
+		return classes;
 	}
 
-	public void setMinutiae(String minutiae) {
-		this.minutiae = minutiae;
+	public void setClasses(int classes) {
+		this.classes = classes;
 	}
 
+	public int getSem() {
+		return sem;
+	}
+
+	public void setSem(int sem) {
+		this.sem = sem;
+	}
+
+	@NotNull
+	private int sem;
+	
 	public String getName() {
 		return name;
 	}
