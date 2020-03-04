@@ -12,7 +12,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "attendance")
 public class Attendance  implements Serializable{
-    @Id
+    
+	@Id
     @ManyToOne
     @JoinColumn
     private Course course;

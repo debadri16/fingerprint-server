@@ -1,7 +1,5 @@
 package stcet.group2020.fpr.controller;
 
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,9 +19,11 @@ public class AdminController {
 	@Autowired
 	private AdminRepository adminRepository;
 		
-	@GetMapping("/get")
-    public ArrayList<Admin> get(){
-        return (ArrayList<Admin>) adminRepository.findAll();
-    }
-
+	@PostMapping("/addAdmin")
+	public boolean addAdmin(@RequestBody Admin admin) {
+		if(adminRepository.save(admin) != null)
+			return true;
+		return false;
+		
+	}
 }
