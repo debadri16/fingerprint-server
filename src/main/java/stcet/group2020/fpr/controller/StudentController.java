@@ -1,5 +1,7 @@
 package stcet.group2020.fpr.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +21,15 @@ public class StudentController {
 	@Autowired
 	private StudentRepository studentRepository;
 		
-	@PostMapping("/addStudent")
+	@GetMapping("/{reg_no}")
+	public Optional<Student> getStudent(long reg_no){
+		return studentRepository.findById(reg_no);
+	}
+	
+	@PostMapping
 	public boolean addStudent(@RequestBody Student student) {
 		if(studentRepository.save(student) != null)
 			return true;
 		return false;
 	}
-	
 }
