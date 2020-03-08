@@ -1,7 +1,10 @@
 package stcet.group2020.fpr.model;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -10,7 +13,7 @@ import javax.validation.constraints.NotNull;
 public class Student {
 	
 	@Id
-	private long reg_no;
+	private String reg_no;
 	
 	@NotNull
 	private String name;
@@ -21,6 +24,9 @@ public class Student {
 	@NotNull
 	private String minutiae;
 
+	@OneToMany(mappedBy = "student")
+    Set<StudentCourse> studentCourse;
+	
 	public String getMinutiae() {
 		return minutiae;
 	}
@@ -45,11 +51,11 @@ public class Student {
 		this.department = department;
 	}
 
-	public long getReg_no() {
+	public String getReg_no() {
 		return reg_no;
 	}
 
-	public void setReg_no(long reg_no) {
+	public void setReg_no(String reg_no) {
 		this.reg_no = reg_no;
 	}
 }

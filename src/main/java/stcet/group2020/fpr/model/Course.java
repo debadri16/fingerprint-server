@@ -1,8 +1,11 @@
 package stcet.group2020.fpr.model;
 
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -11,7 +14,7 @@ import javax.validation.constraints.NotNull;
 public class Course {
 	
 	@Id
-	private long id;
+	private String id;
 
 	@NotNull
 	private String name;
@@ -24,6 +27,9 @@ public class Course {
 	
 	@NotNull
 	private int sem;
+	
+	@OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE)
+    Set<StudentCourse> studentCourse;
 	
 	
 	public int getTotalClasses() {
@@ -58,11 +64,12 @@ public class Course {
 		this.department = department;
 	}
 
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
+
 }

@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import stcet.group2020.fpr.model.Course;
@@ -24,25 +24,24 @@ public class CourseController {
 	@Autowired
 	private CourseRepository courseRepository;
 
-	@GetMapping("/{id}")
-	public Optional<Course> getCourse(@PathVariable long id){
+	@GetMapping
+	public Optional<Course> getCourse(@RequestParam("id") String id){
 		return courseRepository.findById(id);
 	}
 	
-	@GetMapping("/{department}/{sem}")
-	public List<Course> getCourseByDeptSem(@PathVariable String department,@PathVariable int sem){
+	@GetMapping("byDeptSem")
+	public List<Course> getCourseByDeptSem(@RequestParam("dept") String department, @RequestParam("sem") int sem){
 		return courseRepository.findByDepartmentAndSem(department, sem);
 	}
 	
-	@DeleteMapping("/{id}")
-	public void deleteCourse(@PathVariable long id) {
+	@DeleteMapping
+	public void deleteCourse(@RequestParam("id") String id) {
 		courseRepository.deleteById(id);
 	}
 	
+	
 	@PostMapping
-	public boolean addStudent(@RequestBody Course course) {
-		if(courseRepository.save(course) != null)
-			return true;
-		return false;
+	public Course addStudent(@RequestBody Course course) {
+		return courseRepository.save(course);
 	}
 }

@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import stcet.group2020.fpr.model.Course;
 
-public interface CourseRepository extends CrudRepository<Course, Long> {
+public interface CourseRepository extends CrudRepository<Course, String> {
 	
 	public List<Course> findByDepartmentAndSem(String department, int sem);
 }

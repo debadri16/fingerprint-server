@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import stcet.group2020.fpr.model.Student;
@@ -21,15 +22,13 @@ public class StudentController {
 	@Autowired
 	private StudentRepository studentRepository;
 		
-	@GetMapping("/{reg_no}")
-	public Optional<Student> getStudent(long reg_no){
+	@GetMapping
+	public Optional<Student> getStudent(@RequestParam("reg_no") String reg_no){
 		return studentRepository.findById(reg_no);
 	}
 	
 	@PostMapping
-	public boolean addStudent(@RequestBody Student student) {
-		if(studentRepository.save(student) != null)
-			return true;
-		return false;
+	public Student addStudent(@RequestBody Student student) {
+		return studentRepository.save(student);
 	}
 }
