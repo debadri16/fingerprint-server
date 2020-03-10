@@ -1,5 +1,7 @@
 package stcet.group2020.fpr.model;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,19 +12,29 @@ import javax.validation.constraints.NotNull;
 public class Admin {
 	
 	@Id
-	@GeneratedValue()
 	@Column(name="id")
-	private long id;
+	private String id;
 	
 	@NotNull
 	private String name;
 	
 	@NotNull
 	private String department;
-	
-	@NotNull
-	private String minutiae;
 
+    @NotNull
+    @Length(min=536, max=536)
+    private String minutiae;
+
+    @NotNull
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 	public String getMinutiae() {
 		return minutiae;
@@ -48,11 +60,11 @@ public class Admin {
 		this.department = department;
 	}
 
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 }
