@@ -25,7 +25,7 @@ public class AdminController {
 	private AdminRepository adminRepository;
 	
 	@GetMapping
-	public Optional<Admin> getAdmin(@RequestParam("id") long id) {
+	public Optional<Admin> getAdmin(@RequestParam("id") String id) {
 		return adminRepository.findById(id);
 	}
 	
