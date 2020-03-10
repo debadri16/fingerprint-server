@@ -1,0 +1,167 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1:3308
+-- Generation Time: Mar 10, 2020 at 11:51 PM
+-- Server version: 8.0.18
+-- PHP Version: 7.3.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `attendance`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE IF NOT EXISTS `admin` (
+  `id` varchar(255) NOT NULL,
+  `department` varchar(255) NOT NULL,
+  `minutiae` varchar(536) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `department`, `minutiae`, `name`, `password`) VALUES
+('supravo', 'C.S.E.', 'pFbtXTGHMrFJAbeUkaLB+bAqnhMpQ/At0yQ0+dzUeZKos1xvwRkIKQgez5XVloN0UeKBdeTNh5TFNCd72eIYp4LWcmLvPsC9abm6HjaZYUuOjBY2ahejrYWvaDr/yD2duDXDPxj0qngTz18qw+Dk9vj7h2awpXNKkkgP+fFxE2Uf2x7fxeM47F228lnkOx75gAxj3HzjZDQR9uVVOdc0G6zs5jZ+4ghnh4npcViBf/XUWt2B3BZPtXRELuQHMf0FcdxLT3wbFVM28JZ6waZlV0cxcjblDHCzC0vt0bHGkrZFpTmK4/f2R2yZcfXtDkq4GctIFejj2RBkk2YaKgRlRhstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fBstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fBstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fA==', 'Supravo Sengupta', 'FeKw08M4keuw8e9gnsQZQgwg4yDOlMZfvIwzEkSOsiU=');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `course`
+--
+
+DROP TABLE IF EXISTS `course`;
+CREATE TABLE IF NOT EXISTS `course` (
+  `id` varchar(255) NOT NULL,
+  `department` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `sem` int(11) NOT NULL,
+  `total_classes` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `course`
+--
+
+INSERT INTO `course` (`id`, `department`, `name`, `sem`, `total_classes`) VALUES
+('1', 'C.S.E.', 'right', 7, 10),
+('2', 'C.S.E.', 'right', 7, 20);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hibernate_sequence`
+--
+
+DROP TABLE IF EXISTS `hibernate_sequence`;
+CREATE TABLE IF NOT EXISTS `hibernate_sequence` (
+  `next_val` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `hibernate_sequence`
+--
+
+INSERT INTO `hibernate_sequence` (`next_val`) VALUES
+(1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student`
+--
+
+DROP TABLE IF EXISTS `student`;
+CREATE TABLE IF NOT EXISTS `student` (
+  `reg_no` varchar(255) NOT NULL,
+  `department` varchar(255) NOT NULL,
+  `minutiae` varchar(536) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`reg_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`reg_no`, `department`, `minutiae`, `name`) VALUES
+('1', 'C.S.E.', 'LoyB52V68/3fl7Aekgo/FHRFDneyAvgMupwVnWZamwwd0HqptjVObcfD4JqoZDlATSLxgBfKU+ZAh/ulGIJH6G5wZxH3Ba3Zy4gYqCPHsfKZOQH36qeJoctbLpk3IWp9ULub4RJPGWcS5psely7qexiZe3gvUrVdk7vT1GfIJfzeLpSeodJEnxAd30kkGctwTQ5RQhzNdKN++j9YcIZau2QSunTAAVAUG9T7lGinUe8SBM1ge0aCtcnw3FAHlG1DanGXnydi2QKieoGNbq6Tfqp4jsRp15MYR1oLvuqjnzDt0VoNZ1dC+TY/3faWw2nM/zV05r/GVqBC3WS3mgrXSW5Gg5QEkJTi9E6GXMxlZvSek8VizmeJ99dy15sTsUQGGy3J668NX2AqZP9H8Gz5fBstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fBstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fA==', 'Supravo Sengupta LT'),
+('10', 'C.S.E.', 'xljFmPwjDEJLXfuPVyxm9kKq0W8hk5sULRUDnAiY9Q/0vg7VUPf3QPfBnjuyUXTi9tOZdkCQUYZI883P6ZX/BG5PFshOsird7CZHPu11AtdeioiV0TJI1mwptBX28Tgvr1czLUlEZspCZQLdcT5W6aroBKNnYsxxuZhy8g7QVANltuZ2aDrAbL+I8f58vxVfvK5tjEeHXTyOVppvrrise4itQW4/6SH/kJCxclpj0KaEIF5zqiVNvGDwmArj/tIvwwU5lPmoEm1+h2aN8Po+0TFFyP64uG+iSHSedvfFnnd961DwXVxLh7RqhIihjIoG9+VZUNdwILi3nFP0oh6NkBstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fBstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fBstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fA==', 'Supravo Sengupta RL'),
+('2', 'C.S.E.', '+KK4891BbGwB0G6v0s52Bjvnsrrj1/egGD4+Eyma6ut3xIvZeX0lMxSa92XshfjdGAnXjdNpymMHxJ2pS/jscXoLeaa5DvLuQAEKciiTUy3EtuPwKBD4CTSGGpqRyRlAOlfgl2q6AiHQzd8n4Q9uxPsd/ktJtqJAT6r9z/IDf0QZfUphNIZ/3FmMpRoPSqxJCSs4hxfl7+w2upZ6d5taTehEwuQxTanDEajpB5VDH45gT0c8Zb7ySADauMuINSaEVKZxgOaceIPwyO38qrh2Ut8j9DnSIMLoK/4QWn6f4orKbVlH6OP3qiMMVVNRoRquFaurBUiAt1bP1+1FaFauNRc+U9ihS+xxHrQjU8MMV2dTP9mmwm14II+zfiZA/5A5wwAgQ3QgO/1357ZpQS8fthstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fBstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fA==', 'Supravo Sengupta LI'),
+('3', 'C.S.E.', '45RBMJK0u9b3VuHerwbul3IY2xbtOSqwdhJOVpYhKm4ev8F7uXnkDg7wE5kD3maPv9iHj/GrftV3dapZbvBt1VYZxrp6JqEraCLXunyZJu77sdOViYTNgmsOPtmD69RMx9pXMEQgij+JyhBriny7CQpI4fWwEm5PZF0PklLEa5zIU/P4JzIKh6qGdNf1aPDTUDc/aJ9XyhKJVWGA1rhJboq5Onbt9tbJaa+nnyjXIrqY0GEDyy28w7OkRKq3NEdKW0lnb6pdDTGIwzDMpVdb1xJQ/abMpwZiIhqLuzry486cLM9HYloUdpxv/AoE1UterHc9w6/Z0p+REN8a0yBPFyYHZd79cCg3KdMy2piiSoKMxhVBwY0xWsHqgUqgQ0YIHDy9OULF2X8J7RkXxbicSBstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fBstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fA==', 'Supravo Sengupta LM'),
+('4', 'C.S.E.', 'rck4nwCH8qbkqkVHnCxTWrarEP31NfE3m9FyENdQqxCzjhUPoBf2fKwbHXbDDSLevlM2/TjP3z6ygd9YVgjc53GK3xpGPnFdbNfT81Dp9ZIf2zij6uu0T098Ch+v+fJ7DS5V2uglnFX+nUIsQ21+IKE6dN6BNhGRIZ2aNXkWS8Pwqin9oG/ry2bbW3EhekewknPv59FXR+uRGotJUASlPoTvFBUrjnhqJ7ql6twLQjoPZ3HdiQWhE3HfeN+AhnK/ElO/Zw6v7It+xqpMNmBo4B4K2eXcYLSJhbhFxKPEMlgbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fBstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fBstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fBstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fA==', 'Supravo Sengupta LR'),
+('5', 'C.S.E.', 'CdtbxxLRrc+DYU6PrnXZIz4ejf31Rg52zZxlsOmFBiYRwMJ5QCOGRc2PWfkqlz0ehaKWqhUYDAKVK2MYsnnjsHKGZEuZ77QamU+gvWNNp8ybpsYEw3g+zjgPKc+buzvzTfMm234Kf1CdE03yF+3HvjNegGICwk6nBpAqT/jUKgqCQpbbmB+u+bzgNnqpmRpgjyWJQROV/BfCcFJw0ENvRIwy5+Qpjgr+Pp2xwc1CT3Cu2jLPBaF+ve6T49LeK+nG2f3oVYdfAj4eqnxXuoxALyA7E1sE6W60if7w47xfrh4y2xdgzTn0fOvINO7Kw+HrdJ8QZkwkJw1oFZwoxQW9tRstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fBstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fBstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fA==', 'Supravo Sengupta LL'),
+('6', 'C.S.E.', '8CKkVvFIrGdiUqc6muamKbAqnhMpQ/At0yQ0+dzUeZIFc3ITZxPYoT5WZBBvXh0nXiH21VhN4wuXVRfLZGd/3dwGdbw34PkanfyHTdL/33CyXyvFnf9tGO8drUla8dTj6NddFEe758Q6ggENZyEVFjBsRyi/VG3ldNQH2jPOg84+zgncjiKK3vNfXYeMZIZ3sM/buOSn+A4GNCmtPTPRZPzPhgY8XdjIy9uDS70XLqoKSSykg9tR7dctSqVbjqLqhHaLM+wPEaX+u4y1IWaZd8P2zl0kDzt+8ueSfIxAraoBLNSCbGAibfUgiHl9qbjJzKpwbx2lXHzsKGobheWohuxjncLT8TmUk/aN6zGKYpDN/dBNRueSwvUlASMz0GQEGy3J668NX2AqZP9H8Gz5fBstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fBstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fA==', 'Supravo Sengupta RT'),
+('7', 'C.S.E.', 'AZSwae9IcfWj0518HpV2crWOm8ChsLhixtEvZ3Vy0WcR+2VYrjipKF/tF11FJSZ68bdf4+M6qW8g2kPBmtlf2Hx+Q8KLTaoaTyvuUAK8N8j+elgVAwetteiKFEBQhgORk1R/S61KTs842Ovc8Bf0xLh0sttf0Du+FYCw4MLnLaZScrqoRl0/zKKYdwhDbV0Yk+AlCM+ToAOyaTZ2KHTs8fVEBKQpzbqcrDA+pMMCAhCq2OkWjEzoRcRdp9lmQpM49yEK/XYdVEyRrsVsTpgO2BstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fBstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fBstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fBstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fA==', 'Supravo Sengupta RI'),
+('8', 'C.S.E.', 'c1PjIunhcnCwJhzoTlhVvteMGDlzRTKWEe9Nf+Uk7KQqBqcxKd10or4W1uHOr3IAZMXtXsTJCdP2tH4LahbHPotkFsTQ4V9gpSWw2/wP7BJehAniMgsPjyg9RPwU/iyS7SmcHoUfUeWf8WXSdpTRz8L9uT5M1o0yZeutXgYRQNN1NGmYO2k3HsBJdbIsPqLH33uWWtFP00RNnpzDDjrjcKjIz7y2tPH15m4rMrnVy+rip1IdYnEiDHJdEB9hmWZp7+OAF2NZzt9NOQNCullgwBstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fBstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fBstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fBstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fA==', 'Supravo Sengupta RM'),
+('9', 'C.S.E.', 's2FAKRP7l/XYgTkGdlKJAnr7wiSrqCUuZXF7f6PnLIXJfJcvVsgdEXJwlvlpDjVkzxgvs74C3ij7qtGKvA2m3WHRpSER638Qv9U4vhBF8+gRYLmzw331AzLGd0GIlO7Nj0Raco+8JEjswvYGtxIrEVbbimVl8BGng1wNlAVfRu2aTG+yjeir7VUhobw9lRmZxBSeF7YrWvKf6SAsYBApXMX4fcHDvWe1njHCyeX+fL0FkyavLyF68DYdRqAKCANz5NZe65Je8kXtLj5mPiJ1/ISFtHMKOmkkK01+79V5F6HATETAoTh73nya8AOsiORipTfh90QrFBJ62qZ8YLr9AfK2MOqUBpiPKj1lB06tX6WacwUNWYC2iXGXJmwIPFPeQ3aFr//aYIfwi7fC7uZs2BstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fBstyeuvDV9gKmT/R/Bs+XwbLcnrrw1fYCpk/0fwbPl8Gy3J668NX2AqZP9H8Gz5fA==', 'Supravo Sengupta RR');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_course`
+--
+
+DROP TABLE IF EXISTS `student_course`;
+CREATE TABLE IF NOT EXISTS `student_course` (
+  `course_id` varchar(255) NOT NULL,
+  `student_reg_no` varchar(255) NOT NULL,
+  `attendance_count` int(11) NOT NULL,
+  PRIMARY KEY (`course_id`,`student_reg_no`),
+  KEY `IDX8eu2c4tg0i8amuwx6n6d4i8h0` (`course_id`),
+  KEY `FKskq5791g3vys6u2m7jeq9qold` (`student_reg_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `student_course`
+--
+
+INSERT INTO `student_course` (`course_id`, `student_reg_no`, `attendance_count`) VALUES
+('1', '1', 0),
+('1', '2', 0),
+('1', '3', 0),
+('1', '4', 0),
+('1', '5', 0),
+('2', '10', 0),
+('2', '6', 0),
+('2', '7', 0),
+('2', '8', 0),
+('2', '9', 0);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `student_course`
+--
+ALTER TABLE `student_course`
+  ADD CONSTRAINT `FKejrkh4gv8iqgmspsanaji90ws` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`),
+  ADD CONSTRAINT `FKskq5791g3vys6u2m7jeq9qold` FOREIGN KEY (`student_reg_no`) REFERENCES `student` (`reg_no`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
