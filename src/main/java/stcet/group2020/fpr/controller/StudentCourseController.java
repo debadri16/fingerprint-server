@@ -46,7 +46,7 @@ public class StudentCourseController {
 		Student student = studentRepository.findById(studentCourse.getId().getStudent_reg_no()).get();
 		studentCourse.setStudent(student);
 		studentCourse.setAttendance_count(0);
-		if(studentCourse.getStudent().getDepartment().toLowerCase().equals(studentCourse.getCourse().getDepartment().toLowerCase())) {
+		if( studentCourse.getStudent().getDeptId() == studentCourse.getCourse().getDeptId() ) {
 			studentCourseRepository.save(studentCourse);
 			return true;
 		}
@@ -55,7 +55,7 @@ public class StudentCourseController {
 	}
 	
 	@PutMapping("/attendance")
-	public boolean addAttendance(@RequestParam("reg_no") String student_reg_no, @RequestParam("course_id") String course_id) {
+	public int addAttendance(@RequestParam("reg_no") String student_reg_no, @RequestParam("course_id") String course_id) {
 		return studentCourseRepository.updateAttendance(student_reg_no, course_id);
 	}
 }

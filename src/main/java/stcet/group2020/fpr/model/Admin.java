@@ -2,10 +2,14 @@ package stcet.group2020.fpr.model;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -19,7 +23,13 @@ public class Admin {
 	private String name;
 	
 	@NotNull
-	private String department;
+	@Column(name = "dept_id")
+	private int dept_id;
+
+	@ManyToOne
+    @MapsId("dept_id")
+    @JoinColumn(name = "dept_id")
+    Department department;
 
     @NotNull
     @Length(min=536, max=536)
@@ -52,13 +62,6 @@ public class Admin {
 		this.name = name;
 	}
 
-	public String getDepartment() {
-		return department;
-	}
-
-	public void setDepartment(String department) {
-		this.department = department;
-	}
 
 	public String getId() {
 		return id;
@@ -66,5 +69,23 @@ public class Admin {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public int getDept_id() {
+		return dept_id;
+	}
+
+	public void setDept_id(int dept_id) {
+		this.dept_id = dept_id;
+	}
+
+	@JsonIgnore
+	public Department getDepartment() {
+		return department;
+	}
+
+	@JsonIgnore
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 }

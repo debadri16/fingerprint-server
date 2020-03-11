@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import stcet.group2020.fpr.model.Course;
+import stcet.group2020.fpr.model.Department;
 import stcet.group2020.fpr.repository.CourseRepository;
+import stcet.group2020.fpr.repository.DepartmentRepository;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -24,14 +26,17 @@ public class CourseController {
 	@Autowired
 	private CourseRepository courseRepository;
 
+	@Autowired
+	private DepartmentRepository departmentRepository;
+	
 	@GetMapping
 	public Optional<Course> getCourse(@RequestParam("id") String id){
 		return courseRepository.findById(id);
 	}
 	
 	@GetMapping("byDeptSem")
-	public List<Course> getCourseByDeptSem(@RequestParam("dept") String department, @RequestParam("sem") int sem){
-		return courseRepository.findByDepartmentAndSem(department, sem);
+	public List<Course> getCourseByDeptSem(@RequestParam("deptId") int deptId, @RequestParam("sem") int sem){
+		return courseRepository.findByDeptIdAndSem(deptId, sem);
 	}
 	
 	@DeleteMapping
@@ -42,6 +47,8 @@ public class CourseController {
 	
 	@PostMapping
 	public Course addStudent(@RequestBody Course course) {
+		Department department = departmentRepository.findById(course.getDeptId()).get();
+		course.setDepartment(department);
 		return courseRepository.save(course);
 	}
 }

@@ -8,5 +8,5 @@ import stcet.group2020.fpr.model.Course;
 
 public interface CourseRepository extends CrudRepository<Course, String> {
 	
-	public List<Course> findByDepartmentAndSem(String department, int sem);
+	public List<Course> findByDeptIdAndSem(int deptId, int sem);
 }

@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import stcet.group2020.fpr.model.Admin;
+import stcet.group2020.fpr.model.Department;
 import stcet.group2020.fpr.repository.AdminRepository;
+import stcet.group2020.fpr.repository.DepartmentRepository;
 import stcet.group2020.fpr.repository.interfaces.AdminMinutiae;
 
 @CrossOrigin(origins = "*")
@@ -23,6 +25,10 @@ public class AdminController {
 	
 	@Autowired
 	private AdminRepository adminRepository;
+	
+	@Autowired
+	private DepartmentRepository departmentRepository;
+	
 	
 	@GetMapping
 	public Optional<Admin> getAdmin(@RequestParam("id") String id) {
@@ -36,6 +42,8 @@ public class AdminController {
 	
 	@PostMapping
 	public Admin add(@RequestBody Admin admin) {
+		Department department = departmentRepository.findById(admin.getDept_id()).get();
+		admin.setDepartment(department);
 		return adminRepository.save(admin);
 	}
 }

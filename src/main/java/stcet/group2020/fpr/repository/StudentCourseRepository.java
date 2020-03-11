@@ -18,7 +18,7 @@ public interface StudentCourseRepository extends CrudRepository<StudentCourse, S
 	@Modifying
 	@Transactional
     @Query("UPDATE StudentCourse sc SET sc.attendance_count = sc.attendance_count + 1 WHERE sc.id.student_reg_no = :student_reg_no AND sc.id.course_id = :course_id")
-    boolean updateAttendance(@Param("student_reg_no") String student_reg_no, @Param("course_id") String course_id);
+    int updateAttendance(@Param("student_reg_no") String student_reg_no, @Param("course_id") String course_id);
 
 	@Query("SELECT s.reg_no AS reg_no, s.minutiae AS minutiae FROM Student s, StudentCourse sc WHERE sc.id.course_id = :course_id AND sc.id.student_reg_no = s.reg_no")
 	List<StudentMinutiae> getStudentMinutiaeByCourseId(@Param("course_id")String course_id);

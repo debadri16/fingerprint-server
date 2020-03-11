@@ -1,5 +1,6 @@
 package stcet.group2020.fpr.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,30 +13,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import stcet.group2020.fpr.model.Department;
-import stcet.group2020.fpr.model.Student;
 import stcet.group2020.fpr.repository.DepartmentRepository;
-import stcet.group2020.fpr.repository.StudentRepository;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("student")
-public class StudentController {
-	
-	@Autowired
-	private StudentRepository studentRepository;
-	
+@RequestMapping("department")
+public class DepartmentController {
+
 	@Autowired
 	private DepartmentRepository departmentRepository;
-		
+	
 	@GetMapping
-	public Optional<Student> getStudent(@RequestParam("reg_no") String reg_no){
-		return studentRepository.findById(reg_no);
+	public Optional<Department> getDepartment(@RequestParam("id") int id) {
+		return departmentRepository.findById(id);
+	}
+	
+	@GetMapping("/all")
+	public List<Department> getALL() {
+		return (List<Department>) departmentRepository.findAll();
 	}
 	
 	@PostMapping
-	public Student addStudent(@RequestBody Student student) {
-		Department department = departmentRepository.findById(student.getDeptId()).get();
-		student.setDepartment(department);
-		return studentRepository.save(student);
+	public Department add(@RequestBody Department department) {
+		return departmentRepository.save(department);
 	}
 }
