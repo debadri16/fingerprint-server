@@ -15,6 +15,9 @@ import stcet.group2020.fpr.repository.interfaces.StudentReport;
 
 public interface StudentCourseRepository extends CrudRepository<StudentCourse, String> {
 
+	@Query("SELECT sc as StudentCourse FROM StudentCourse sc WHERE sc.id.course_id = :course_id AND sc.id.student_reg_no = :reg_no")
+	public StudentCourse findAttendance(@Param("reg_no") String student_reg_no, @Param("course_id") String course_id);
+	
 	@Modifying
 	@Transactional
     @Query("UPDATE StudentCourse sc SET sc.attendance_count = sc.attendance_count + 1 WHERE sc.id.student_reg_no = :student_reg_no AND sc.id.course_id = :course_id")

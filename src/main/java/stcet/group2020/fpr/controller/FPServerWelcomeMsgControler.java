@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/fpserver")
 public class FPServerWelcomeMsgControler {
     @GetMapping("/welcomemsg")
-    public String getAdmin() {
+    public String welcome() {
         return "Wellcome From FP Server.";
     }
 }

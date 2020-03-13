@@ -17,19 +17,19 @@ import stcet.group2020.fpr.repository.DepartmentRepository;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("department")
+@RequestMapping("departments")
 public class DepartmentController {
 
 	@Autowired
 	private DepartmentRepository departmentRepository;
 	
-	@GetMapping
+	@GetMapping(params = "id")
 	public Optional<Department> getDepartment(@RequestParam("id") int id) {
 		return departmentRepository.findById(id);
 	}
 	
-	@GetMapping("/all")
-	public List<Department> getALL() {
+	@GetMapping
+	public List<Department> getAll() {
 		return (List<Department>) departmentRepository.findAll();
 	}
 	

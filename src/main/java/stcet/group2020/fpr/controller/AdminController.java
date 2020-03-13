@@ -20,7 +20,7 @@ import stcet.group2020.fpr.repository.interfaces.AdminMinutiae;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("admin")
+@RequestMapping("admins")
 public class AdminController {
 	
 	@Autowired
@@ -29,13 +29,17 @@ public class AdminController {
 	@Autowired
 	private DepartmentRepository departmentRepository;
 	
-	
-	@GetMapping
+	@GetMapping(params = "id")
 	public Optional<Admin> getAdmin(@RequestParam("id") String id) {
 		return adminRepository.findById(id);
 	}
 	
-	@GetMapping("/allMinutiae")
+	@GetMapping
+	public List<Admin> getAll() {
+		return (List<Admin>) adminRepository.findAll();
+	}
+	
+	@GetMapping("/minutiae")
 	public List<AdminMinutiae> getAllMinutiae(){
 		return adminRepository.findAdminMinutiae();
 	}

@@ -34,7 +34,7 @@ public class StudentCourseController {
 	@Autowired
 	private StudentRepository studentRepository;	
 
-	@GetMapping("/allStudentMinutae")
+	@GetMapping("/studentMinutiae")
 	public List<StudentMinutiae> getStudentMinutiaeByCourseId(@RequestParam("id") String course_id){
 		return studentCourseRepository.getStudentMinutiaeByCourseId(course_id);
 	}
@@ -52,6 +52,11 @@ public class StudentCourseController {
 		}
 		else
 			return false;
+	}
+	
+	@GetMapping(params = {"reg_no", "course_id"})
+	public StudentCourse getAttendance(@RequestParam("reg_no") String student_reg_no, @RequestParam("course_id") String course_id){
+		return studentCourseRepository.findAttendance(student_reg_no, course_id);
 	}
 	
 	@PutMapping("/attendance")

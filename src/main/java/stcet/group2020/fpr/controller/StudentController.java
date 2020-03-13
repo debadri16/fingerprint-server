@@ -18,7 +18,7 @@ import stcet.group2020.fpr.repository.StudentRepository;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("student")
+@RequestMapping("students")
 public class StudentController {
 	
 	@Autowired
@@ -27,7 +27,7 @@ public class StudentController {
 	@Autowired
 	private DepartmentRepository departmentRepository;
 		
-	@GetMapping
+	@GetMapping(params = "reg_no")
 	public Optional<Student> getStudent(@RequestParam("reg_no") String reg_no){
 		return studentRepository.findById(reg_no);
 	}

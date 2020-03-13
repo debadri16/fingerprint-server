@@ -20,7 +20,7 @@ import stcet.group2020.fpr.repository.DepartmentRepository;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("course")
+@RequestMapping("courses")
 public class CourseController {
 	
 	@Autowired
@@ -29,17 +29,23 @@ public class CourseController {
 	@Autowired
 	private DepartmentRepository departmentRepository;
 	
-	@GetMapping
+	@GetMapping(params = "id")
 	public Optional<Course> getCourse(@RequestParam("id") String id){
 		return courseRepository.findById(id);
 	}
 	
-	@GetMapping("byDeptSem")
+	@GetMapping(params = {"deptId", "sem"})
 	public List<Course> getCourseByDeptSem(@RequestParam("deptId") int deptId, @RequestParam("sem") int sem){
 		return courseRepository.findByDeptIdAndSem(deptId, sem);
 	}
 	
-	@DeleteMapping
+	@GetMapping
+	public List<Course> getAll() {
+		return (List<Course>) courseRepository.findAll();
+	}
+
+	
+	@DeleteMapping(params = "id")
 	public void deleteCourse(@RequestParam("id") String id) {
 		courseRepository.deleteById(id);
 	}
