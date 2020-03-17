@@ -1,18 +1,19 @@
 package stcet.group2020.fpr.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 import com.sun.istack.NotNull;
 
 @Entity
-@Table(name = "department")
 public class Department {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "deptId", updatable = false, nullable = false)
 	private int deptId;
 	
 	@NotNull
@@ -21,6 +22,7 @@ public class Department {
 	@NotNull
 	private String fullName;
 	
+	//getter setters
 
 	public int getDeptId() {
 		return deptId;
@@ -41,10 +43,9 @@ public class Department {
 	public String getFullName() {
 		return fullName;
 	}
-	
+
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
-	
-	
+		
 }

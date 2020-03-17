@@ -1,40 +1,71 @@
 package stcet.group2020.fpr.model;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.Length;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "course")
 public class Course {
 	
 	@Id
-	private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "courseNo", updatable = false, nullable = false)
+	private long courseNo;
+	
+	@NotNull
+	private String courseId;
 
+	private String groupId;
+	
 	@NotNull
 	private String name;
 	
 	@NotNull
-	@Column(name = "deptId")
 	private int deptId;
+	
+	@NotNull
+	private int totalClasses;
+	
+	@NotNull
+	private int sem;
 
-	@ManyToOne
-    @MapsId("deptId")
-    @JoinColumn(name = "deptId")
-    Department department;
+	//getter setters
+	public long getCourseNo() {
+		return courseNo;
+	}
+	
+	public void setCourseNo(long courseNo) {
+		this.courseNo = courseNo;
+	}
+
+	public String getCourseId() {
+		return courseId;
+	}
+
+	public void setCourseId(String courseId) {
+		this.courseId = courseId;
+	}
+
+
+	public String getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public int getDeptId() {
 		return deptId;
@@ -44,25 +75,6 @@ public class Course {
 		this.deptId = deptId;
 	}
 
-	@JsonIgnore
-	public void setDepartment(Department department) {
-		this.department = department;
-	}
-
-	@JsonIgnore
-	public Department getDepartment() {
-		return department;
-	}	
-	@NotNull
-	private int totalClasses;
-	
-	@NotNull
-	private int sem;
-	
-	@OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE)
-    Set<StudentCourse> studentCourse;
-	
-	
 	public int getTotalClasses() {
 		return totalClasses;
 	}
@@ -77,22 +89,5 @@ public class Course {
 
 	public void setSem(int sem) {
 		this.sem = sem;
-	}
-	
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
+	}	
 }

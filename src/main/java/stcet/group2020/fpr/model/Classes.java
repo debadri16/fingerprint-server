@@ -1,41 +1,40 @@
 package stcet.group2020.fpr.model;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Index;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 
 @Entity
-@Table(name = "studentCourse", indexes = {
-@Index(columnList = "courseNo")
-})
-public class StudentCourse{
+@Table(name = "classes")
+public class Classes {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "scId", updatable = false, nullable = false)
-	private long scId;
-	
+	@Column(name = "classId", updatable = false, nullable = false)
+	private long classId;
+
 	@NotNull
 	private long courseNo;
 	
-	@NotNull
-	private String regNo;
+	private LocalDate date;
 
-	public String getRegNo() {
-		return regNo;
+	
+	//getter setters
+	public long getClassId() {
+		return classId;
 	}
 
-	public void setRegNo(String regNo) {
-		this.regNo = regNo;
+	public void setClassId(long classId) {
+		this.classId = classId;
 	}
+	
 
 	public long getCourseNo() {
 		return courseNo;
@@ -45,14 +44,15 @@ public class StudentCourse{
 		this.courseNo = courseNo;
 	}
 
-	public long getScId() {
-		return scId;
+	public LocalDate getDate() {
+		return date;
 	}
 
-	@JsonIgnore
-	public void setScId(long scId) {
-		this.scId = scId;
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
-	
-	
+	 
+	//getter setters
+	 
+	 
 }

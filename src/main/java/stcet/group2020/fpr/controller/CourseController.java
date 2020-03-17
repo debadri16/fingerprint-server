@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import stcet.group2020.fpr.model.Course;
-import stcet.group2020.fpr.model.Department;
 import stcet.group2020.fpr.repository.CourseRepository;
-import stcet.group2020.fpr.repository.DepartmentRepository;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -26,17 +24,20 @@ public class CourseController {
 	@Autowired
 	private CourseRepository courseRepository;
 
-	@Autowired
-	private DepartmentRepository departmentRepository;
 	
-	@GetMapping(params = "id")
-	public Optional<Course> getCourse(@RequestParam("id") String id){
-		return courseRepository.findById(id);
+	@GetMapping(params = "courseNo")
+	public Optional<Course> getCourse(@RequestParam("courseNo") Long courseNo){
+		return courseRepository.findById(courseNo);
 	}
 	
 	@GetMapping(params = {"deptId", "sem"})
 	public List<Course> getCourseByDeptSem(@RequestParam("deptId") int deptId, @RequestParam("sem") int sem){
 		return courseRepository.findByDeptIdAndSem(deptId, sem);
+	}
+	
+	@GetMapping(params = {"courseId", "groupId"})
+	public Optional<Course> getCourseByIdGroup(@RequestParam("courseId") String courseId, @RequestParam("groupId") String groupId){
+		return courseRepository.findOneByCourseIdAndGroupId(courseId, groupId);
 	}
 	
 	@GetMapping
@@ -46,15 +47,13 @@ public class CourseController {
 
 	
 	@DeleteMapping(params = "id")
-	public void deleteCourse(@RequestParam("id") String id) {
+	public void deleteCourse(@RequestParam("id") Long id) {
 		courseRepository.deleteById(id);
 	}
 	
 	
 	@PostMapping
 	public Course addStudent(@RequestBody Course course) {
-		Department department = departmentRepository.findById(course.getDeptId()).get();
-		course.setDepartment(department);
 		return courseRepository.save(course);
 	}
 }

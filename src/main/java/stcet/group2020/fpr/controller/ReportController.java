@@ -18,17 +18,17 @@ import stcet.group2020.fpr.repository.interfaces.StudentReport;
 @RequestMapping("reports")
 public class ReportController {
 	
-	@Autowired
-	private StudentCourseRepository studentCourseRepository;	
+//	@Autowired
+//	private StudentCourseRepository studentCourseRepository;	
 	
-	@GetMapping(params = "reg_no")
-	public List<StudentReport> getReportByStudent(@RequestParam("reg_no") String student_reg_no){
-		return studentCourseRepository.getReportByStudent(student_reg_no);
-	}
-	
-	@GetMapping(params = "course_id")
-	public List<CourseReport> getReportByCourse(@RequestParam("course_id") String course_id){
-		return studentCourseRepository.getReportByCourse(course_id);
-	}
+//	@GetMapping(params = "reg_no")
+//	public List<StudentReport> getReportByStudent(@RequestParam("reg_no") String student_reg_no){
+//		return studentCourseRepository.getReportByStudent(student_reg_no);
+//	}
+//	
+//	@GetMapping(params = "course_id")
+//	public List<CourseReport> getReportByCourse(@RequestParam("course_id") String course_id){
+//		return studentCourseRepository.getReportByCourse(course_id);
+//	}
 	
 }
