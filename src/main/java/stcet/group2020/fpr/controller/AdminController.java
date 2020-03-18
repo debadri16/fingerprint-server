@@ -33,6 +33,11 @@ public class AdminController {
 		return (List<Admin>) adminRepository.findAll();
 	}
 	
+	@PostMapping("/login")
+	public Optional<Admin> login(@RequestBody Admin admin) {
+		return adminRepository.findOneByAdminIdAndPassword(admin.getAdminId(),admin.getPassword());
+	}
+	
 	@PostMapping
 	public Admin add(@RequestBody Admin admin) {
 		return adminRepository.save(admin);
