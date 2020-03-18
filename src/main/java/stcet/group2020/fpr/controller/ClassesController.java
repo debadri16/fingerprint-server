@@ -54,6 +54,8 @@ public class ClassesController {
 	@PostMapping
 	public Classes add(@RequestBody Classes classes) {
 		//save class
+		LocalDate date = LocalDate.now();
+		classes.setDate(date);
 		Classes classResponse = classesRepository.save(classes);
 		//get all student regNos under classes.courseId
 		List<Student> students = studentCourseRepository.getStudentByCourseId(classResponse.getCourseId());
@@ -70,8 +72,6 @@ public class ClassesController {
 		}
 		attendanceRepository.saveAll(attendances);
 
-		LocalDate date = LocalDate.now();
-		classes.setDate(date);
 		return classResponse;
 	}
 }
