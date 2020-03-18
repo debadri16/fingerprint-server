@@ -35,10 +35,11 @@ public class CourseController {
 		return courseRepository.findByDeptIdAndSem(deptId, sem);
 	}
 	
-	@GetMapping(params = {"courseId", "groupId"})
-	public Optional<Course> getCourseByIdGroup(@RequestParam("courseId") String courseId, @RequestParam("groupId") String groupId){
-		return courseRepository.findOneByCourseIdAndGroupId(courseId, groupId);
+	@GetMapping(params = {"courseCode", "groupNo"})
+	public Optional<Course> getCourseByIdGroup(@RequestParam("courseCode") String courseCode, @RequestParam("groupNo") String groupNo){
+		return courseRepository.findOneByCourseCodeAndGroupNo(courseCode, groupNo);
 	}
+	
 	
 	@GetMapping
 	public List<Course> getAll() {

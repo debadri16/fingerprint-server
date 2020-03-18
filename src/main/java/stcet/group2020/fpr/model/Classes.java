@@ -21,7 +21,7 @@ public class Classes {
 	private long classId;
 
 	@NotNull
-	private long courseNo;
+	private long courseId;
 	
 	private LocalDate date;
 
@@ -36,12 +36,12 @@ public class Classes {
 	}
 	
 
-	public long getCourseNo() {
-		return courseNo;
+	public long getCourseId() {
+		return courseId;
 	}
 
-	public void setCourseNo(long courseNo) {
-		this.courseNo = courseNo;
+	public void setCourseId(long courseId) {
+		this.courseId = courseId;
 	}
 
 	public LocalDate getDate() {
@@ -51,8 +51,6 @@ public class Classes {
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
-	 
-	//getter setters
 	 
 	 
 }

@@ -13,13 +13,13 @@ public class Course {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "courseNo", updatable = false, nullable = false)
-	private long courseNo;
+	@Column(name = "courseId", updatable = false, nullable = false)
+	private long courseId;
 	
 	@NotNull
-	private String courseId;
+	private String courseCode;
 
-	private String groupId;
+	private String groupNo;
 	
 	@NotNull
 	private String name;
@@ -29,34 +29,33 @@ public class Course {
 	
 	@NotNull
 	private int totalClasses;
-	
+
 	@NotNull
 	private int sem;
 
-	//getter setters
-	public long getCourseNo() {
-		return courseNo;
-	}
-	
-	public void setCourseNo(long courseNo) {
-		this.courseNo = courseNo;
-	}
-
-	public String getCourseId() {
+	//getter setters	
+	public long getCourseId() {
 		return courseId;
 	}
 
-	public void setCourseId(String courseId) {
+	public void setCourseId(long courseId) {
 		this.courseId = courseId;
 	}
 
-
-	public String getGroupId() {
-		return groupId;
+	public String getCourseCode() {
+		return courseCode;
 	}
 
-	public void setGroupId(String groupId) {
-		this.groupId = groupId;
+	public void setCourseCode(String courseCode) {
+		this.courseCode = courseCode;
+	}
+
+	public String getGroupNo() {
+		return groupNo;
+	}
+
+	public void setGroupNo(String groupNo) {
+		this.groupNo = groupNo;
 	}
 
 	public String getName() {

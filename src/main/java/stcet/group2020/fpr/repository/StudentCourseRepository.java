@@ -10,8 +10,8 @@ import stcet.group2020.fpr.model.StudentCourse;
 
 public interface StudentCourseRepository extends CrudRepository<StudentCourse, Long> {
 
-	@Query("SELECT s AS Student FROM Student s, StudentCourse sc WHERE sc.courseNo = ?1 AND sc.regNo = s.regNo")
-	List<Student> getStudentMinutiaeByCourseNo(Long courseNo);
+	@Query("SELECT s AS Student FROM Student s, StudentCourse sc WHERE sc.courseId = ?1 AND sc.regNo = s.regNo")
+	List<Student> getStudentByCourseId(Long courseId);
 	
 //	@Query("SELECT sc as StudentCourse FROM StudentCourse sc WHERE sc.id.course_id = :course_id AND sc.id.student_reg_no = :reg_no")
 //	public StudentCourse findAttendance(@Param("reg_no") String student_reg_no, @Param("course_id") String course_id);

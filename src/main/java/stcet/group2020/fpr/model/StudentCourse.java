@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "studentCourse", indexes = {
-@Index(columnList = "courseNo")
+@Index(columnList = "courseId")
 })
 public class StudentCourse{
 	
@@ -24,7 +24,7 @@ public class StudentCourse{
 	private long scId;
 	
 	@NotNull
-	private long courseNo;
+	private long courseId;
 	
 	@NotNull
 	private String regNo;
@@ -37,12 +37,12 @@ public class StudentCourse{
 		this.regNo = regNo;
 	}
 
-	public long getCourseNo() {
-		return courseNo;
+	public long getCourseId() {
+		return courseId;
 	}
 
-	public void setCourseNo(long courseNo) {
-		this.courseNo = courseNo;
+	public void setCourseId(long courseId) {
+		this.courseId = courseId;
 	}
 
 	public long getScId() {

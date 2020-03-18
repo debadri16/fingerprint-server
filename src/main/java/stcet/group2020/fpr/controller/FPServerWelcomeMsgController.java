@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/fpserver")
-public class FPServerWelcomeMsgControler {
+public class FPServerWelcomeMsgController {
     @GetMapping("/welcomemsg")
     public String welcome() {
-        return "Wellcome From FP Server.";
+        return "Welcome From FP Server.";
     }
 }

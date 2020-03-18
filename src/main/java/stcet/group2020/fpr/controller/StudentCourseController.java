@@ -27,10 +27,10 @@ public class StudentCourseController {
 	@Autowired
 	private CourseRepository courseRepository;	
 
-	@GetMapping("/studentMinutiae")
-	public List<Student> getStudentMinutiaeByCourse(@RequestParam("courseId") String courseId, @RequestParam("groupId") String groupId){
-		long courseNo = courseRepository.findOneByCourseIdAndGroupId(courseId, groupId).get().getCourseNo();
-		return studentCourseRepository.getStudentMinutiaeByCourseNo(courseNo);
+	@GetMapping("/student")
+	public List<Student> getStudentByCourse(@RequestParam("courseCode") String courseCode, @RequestParam("groupNo") String groupNo){
+		long courseId = courseRepository.findOneByCourseCodeAndGroupNo(courseCode, groupNo).get().getCourseId();
+		return studentCourseRepository.getStudentByCourseId(courseId);
 	}
 	
 	@PostMapping

@@ -10,6 +10,6 @@ import stcet.group2020.fpr.model.Classes;
 
 public interface ClassesRepository extends CrudRepository<Classes, Long> {
 	
-	public List<Classes> findByCourseNo(Long courseNo);
-	public Optional<Classes> findOneByCourseNoAndDate(Long courseNo, LocalDate date);
+	public List<Classes> findByCourseId(Long courseId);
+	public Optional<Classes> findOneByCourseIdAndDate(Long courseId, LocalDate date);
 }
