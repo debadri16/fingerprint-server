@@ -1,5 +1,6 @@
 package stcet.group2020.fpr.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,15 @@ public class StudentController {
 	
 	@Autowired
 	private StudentRepository studentRepository;
-			
-	@GetMapping(params = "reg_no")
-	public Optional<Student> getStudent(@RequestParam("reg_no") String reg_no){
-		return studentRepository.findById(reg_no);
+	
+	@GetMapping
+	public List<Student> allStudent(){
+		return (List<Student>)studentRepository.findAll();
+	}
+
+	@GetMapping(params = "regNo")
+	public Optional<Student> getStudent(@RequestParam("regNo")String regNo){
+		return studentRepository.findById(regNo);
 	}
 	
 	@PostMapping
