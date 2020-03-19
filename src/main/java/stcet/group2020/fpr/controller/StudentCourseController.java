@@ -27,9 +27,14 @@ public class StudentCourseController {
 	@Autowired
 	private CourseRepository courseRepository;	
 
-	@GetMapping("/student")
+	@GetMapping(name = "/student", params = {"courseCode", "groupNo"})
 	public List<Student> getStudentByCourse(@RequestParam("courseCode") String courseCode, @RequestParam("groupNo") String groupNo){
 		long courseId = courseRepository.findOneByCourseCodeAndGroupNo(courseCode, groupNo).get().getCourseId();
+		return studentCourseRepository.getStudentByCourseId(courseId);
+	}
+	
+	@GetMapping(name = "/student", params = "courseId")
+	public List<Student> getStudentByCourseId(@RequestParam("courseId") long courseId){
 		return studentCourseRepository.getStudentByCourseId(courseId);
 	}
 	

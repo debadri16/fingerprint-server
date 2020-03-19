@@ -27,7 +27,6 @@ public class Course {
 	@NotNull
 	private int deptId;
 	
-	@NotNull
 	private int totalClasses;
 
 	@NotNull

@@ -25,9 +25,9 @@ public class CourseController {
 	private CourseRepository courseRepository;
 
 	
-	@GetMapping(params = "courseNo")
-	public Optional<Course> getCourse(@RequestParam("courseNo") Long courseNo){
-		return courseRepository.findById(courseNo);
+	@GetMapping(params = "courseId")
+	public Optional<Course> getCourse(@RequestParam("courseId") Long courseId){
+		return courseRepository.findById(courseId);
 	}
 	
 	@GetMapping(params = {"deptId", "sem"})
@@ -47,14 +47,14 @@ public class CourseController {
 	}
 
 	
-	@DeleteMapping(params = "id")
-	public void deleteCourse(@RequestParam("id") Long id) {
-		courseRepository.deleteById(id);
+	@DeleteMapping(params = "courseId")
+	public void deleteCourse(@RequestParam("courseId") Long courseId) {
+		courseRepository.deleteById(courseId);
 	}
 	
 	
 	@PostMapping
-	public Course addStudent(@RequestBody Course course) {
+	public Course addCourse(@RequestBody Course course) {
 		return courseRepository.save(course);
 	}
 }
