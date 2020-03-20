@@ -2,7 +2,6 @@ package stcet.group2020.fpr.model;
 
 import org.hibernate.validator.constraints.Length;
 
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
@@ -19,6 +18,9 @@ public class Student {
 	
 	@NotNull
 	private int deptId;
+
+	@NotNull
+	private int batchNo;
 
 	@NotNull
 	@Length(min=1, max=536)
@@ -57,6 +59,14 @@ public class Student {
 
 	public void setMinutiae(String minutiae) {
 		this.minutiae = minutiae;
+	}
+
+	public int getBatchNo() {
+		return batchNo;
+	}
+
+	public void setBatchNo(int batchNo) {
+		this.batchNo = batchNo;
 	}
 
 	
