@@ -40,12 +40,10 @@ public class CourseController {
 		return courseRepository.findOneByCourseCodeAndGroupNo(courseCode, groupNo);
 	}
 	
-	
 	@GetMapping
 	public List<Course> getAll() {
-		return (List<Course>) courseRepository.findAll();
+		return (List<Course>) courseRepository.findAllOrderByName();
 	}
-
 	
 	@DeleteMapping(params = "courseId")
 	public void deleteCourse(@RequestParam("courseId") Long courseId) {

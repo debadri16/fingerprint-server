@@ -11,5 +11,5 @@ public interface CourseRepository extends CrudRepository<Course, Long> {
 	
 	public List<Course> findByDeptIdAndSem(int deptId, int sem);
 	public Optional<Course> findOneByCourseCodeAndGroupNo(String courseCode, String groupNo);
-	
+	public List<Course> findAllOrderByName();
 }
