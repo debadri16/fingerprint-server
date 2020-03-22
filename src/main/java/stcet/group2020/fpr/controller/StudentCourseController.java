@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -51,6 +52,11 @@ public class StudentCourseController {
 	@PostMapping("list")
 	public List<StudentCourse> add(@RequestBody List<StudentCourse> studentCourse) {
 		return (List<StudentCourse>) studentCourseRepository.saveAll(studentCourse);
+	}
+
+	@DeleteMapping(params = {"courseId","regNo"})
+	public void deleteStudentCourse(@RequestParam("courseId")long courseId, @RequestParam("regNo") String regNo) {
+		studentCourseRepository.deleteByCourseIdAndRegNo(courseId,regNo);
 	}
 	
 }
