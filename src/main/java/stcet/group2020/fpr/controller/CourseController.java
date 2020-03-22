@@ -42,7 +42,7 @@ public class CourseController {
 	
 	@GetMapping
 	public List<Course> getAll() {
-		return (List<Course>) courseRepository.findAllOrderByName();
+		return (List<Course>) courseRepository.findAllByOrderByName();
 	}
 	
 	@DeleteMapping(params = "courseId")
