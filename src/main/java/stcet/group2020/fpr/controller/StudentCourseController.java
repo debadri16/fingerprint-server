@@ -42,5 +42,10 @@ public class StudentCourseController {
 	public StudentCourse add(@RequestBody StudentCourse studentCourse) {
 		return studentCourseRepository.save(studentCourse);
 	}
+
+	@PostMapping("list")
+	public List<StudentCourse> add(@RequestBody List<StudentCourse> studentCourse) {
+		return (List<StudentCourse>) studentCourseRepository.saveAll(studentCourse);
+	}
 	
 }

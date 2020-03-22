@@ -40,6 +40,11 @@ public class StudentController {
 		return studentRepository.findByBatchNo(batchNo);
 	}
 
+	@GetMapping(params = {"batchNo", "deptId"})
+	public List<Student> getStudentByBatchNo(@RequestParam("batchNo")int batchNo, @RequestParam("deptId")int deptId){
+		return studentRepository.findByBatchNoAndDeptId(batchNo, deptId);
+	}
+
 	@PostMapping
 	public Student addStudent(@RequestBody Student student) {
 		return studentRepository.save(student);
@@ -59,4 +64,5 @@ public class StudentController {
 	public void deleteBatch(@RequestParam("batchNo") int batchNo) {
 		studentRepository.deleteByBatchNo(batchNo);
 	}
+	
 }

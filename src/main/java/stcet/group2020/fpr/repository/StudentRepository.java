@@ -14,6 +14,8 @@ public interface StudentRepository extends CrudRepository<Student, String> {
     
     public List<Student> findByBatchNo(int batchNo);
 
+    public List<Student> findByBatchNoAndDeptId(int batchNo, int deptId);
+
     @Modifying
     @Transactional
     @Query("UPDATE Student s SET s.deptId = ?2 WHERE s.regNo = ?1")
