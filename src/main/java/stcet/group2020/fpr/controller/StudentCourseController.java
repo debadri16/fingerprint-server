@@ -32,13 +32,13 @@ public class StudentCourseController {
 		return (List<StudentCourse>) studentCourseRepository.findAll();
 	}
 
-	@GetMapping(name = "/student", params = {"courseCode", "groupNo"})
+	@GetMapping(name = "student", params = {"courseCode", "groupNo"})
 	public List<Student> getStudentByCourse(@RequestParam("courseCode") String courseCode, @RequestParam("groupNo") String groupNo){
 		long courseId = courseRepository.findOneByCourseCodeAndGroupNo(courseCode, groupNo).get().getCourseId();
 		return studentCourseRepository.getStudentByCourseId(courseId);
 	}
 	
-	@GetMapping(name = "/student", params = "courseId")
+	@GetMapping(name = "student", params = "courseId")
 	public List<Student> getStudentByCourseId(@RequestParam("courseId") long courseId){
 		return studentCourseRepository.getStudentByCourseId(courseId);
 	}
