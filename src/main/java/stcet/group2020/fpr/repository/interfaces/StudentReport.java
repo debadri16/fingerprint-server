@@ -1,9 +1,8 @@
 package stcet.group2020.fpr.repository.interfaces;
 
+import java.time.LocalDate;
+
 public interface StudentReport {
-	String getId();
-	String getName();
-	int getAttendance_count();
-	int getTotalClasses();	
-	
+	LocalDate getDate();
+	Boolean getPresent();	
 }

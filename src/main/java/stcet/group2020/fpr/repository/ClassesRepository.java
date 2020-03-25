@@ -12,4 +12,6 @@ public interface ClassesRepository extends CrudRepository<Classes, Long> {
 	
 	public List<Classes> findByCourseId(Long courseId);
 	public Optional<Classes> findOneByCourseIdAndDate(Long courseId, LocalDate date);
+	public List<Classes> findByCourseIdOrderByDate(Long courseId);
+	
 }

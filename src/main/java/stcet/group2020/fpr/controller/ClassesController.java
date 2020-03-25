@@ -1,6 +1,7 @@
 package stcet.group2020.fpr.controller;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +36,10 @@ public class ClassesController {
 	@Autowired
 	private AttendanceRepository attendanceRepository;
 	
+	@GetMapping
+	public List<Classes> getAll() {
+		return (List<Classes>) classesRepository.findAll();
+	}
 	
 	@GetMapping(params = "classId")
 	public Optional<Classes> getClass(@RequestParam("classId") Long classId){
@@ -50,12 +55,23 @@ public class ClassesController {
 	public Optional<Classes> getByCourseDate(@RequestParam("courseId") Long courseId, @RequestParam("date") LocalDate date){
 		return classesRepository.findOneByCourseIdAndDate(courseId, date);
 	}
+
+	@GetMapping(path = "dates", params = "courseId")
+	public List<String> getDatesByCourseId(@RequestParam("courseId") Long courseId){
+		List<Classes> classes = classesRepository.findByCourseIdOrderByDate(courseId);
+		List<String> dates = new ArrayList<>();
+		DateTimeFormatter formatters = DateTimeFormatter.ofPattern("d/M/uu");
+		for(Classes _class: classes){
+			dates.add(_class.getDate().format(formatters));
+		}
+		return dates;
+	}
 	
 	@PostMapping
 	public Classes add(@RequestBody Classes classes) {
 		//save class
-		LocalDate date = LocalDate.now();
-		classes.setDate(date);
+		// LocalDate date = LocalDate.now();
+		// classes.setDate(date);
 		Classes classResponse = classesRepository.save(classes);
 		//get all student regNos under classes.courseId
 		List<Student> students = studentCourseRepository.getStudentByCourseId(classResponse.getCourseId());
