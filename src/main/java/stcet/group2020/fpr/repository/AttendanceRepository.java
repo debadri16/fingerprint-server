@@ -1,7 +1,6 @@
 package stcet.group2020.fpr.repository;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -39,12 +39,16 @@ public class AttendanceController {
 	@GetMapping(params = "courseId")
 	public List<Map<String,Object>> getStudents(@RequestParam("courseId") Long courseId){
 		List<Map<String,Object>> studentsRes = new ArrayList<>();
+		//all students under courseId
 		List<Student> students = studentCourseRepository.getStudentByCourseId(courseId);
+		//date time formatter
 		DateTimeFormatter formatters = DateTimeFormatter.ofPattern("d/M/uu");
 		for(Student student:students){
+			//creating each student map
 			Map<String, Object> studentRes = new HashMap<>();
 			studentRes.put("regNo", student.getRegNo());
 			studentRes.put("name", student.getName());
+			//dates::present/absent
 			List<StudentReport> presentList = attendanceRepository.getPresentList(courseId,student.getRegNo());
 			for(StudentReport present: presentList){
 				studentRes.put(present.getDate().format(formatters),present.getPresent()?"P":"A");
