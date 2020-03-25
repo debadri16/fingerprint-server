@@ -55,7 +55,7 @@ public class AttendanceController {
 	}
 
 	@PutMapping(params = {"regNo", "classId"})
-	public int addAttendance(@RequestParam("regNo") String regNo, @RequestParam("classId") long classId){
+	public int addAttendance(@RequestParam("regNo") String regNo, @RequestParam("classId") Long classId){
 		return attendanceRepository.addAttendance(regNo, classId);
 	}
 

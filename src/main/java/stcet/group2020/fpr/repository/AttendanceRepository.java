@@ -16,7 +16,7 @@ public interface AttendanceRepository extends CrudRepository<Attendance, Long> {
 
     @Modifying
     @Transactional
-    @Query("UPDATE Attendance a SET a.present = 1 WHERE a.regNo = ?1 AND a.classId = ?2")
+    @Query("UPDATE Attendance a SET a.present = true WHERE a.regNo = ?1 AND a.classId = ?2")
     int addAttendance(@Param("regNo") String regNo, @Param("classId") long classId);
     
     @Query("SELECT c.date as date, a.present as present FROM Attendance a, Classes c WHERE c.courseId = ?1 AND a.classId = c.classId AND a.regNo = ?2")
