@@ -31,10 +31,10 @@ public class AttendanceController {
 	@Autowired
 	private StudentCourseRepository studentCourseRepository;
 
-	@GetMapping
-	public List<Attendance> getAll() {
-		return (List<Attendance>) attendanceRepository.findAll();
-	}
+	// @GetMapping
+	// public List<Attendance> getAll() {
+	// 	return (List<Attendance>) attendanceRepository.findAll();
+	// }
 
 	@GetMapping(params = "courseId")
 	public List<Map<String,Object>> getStudents(@RequestParam("courseId") Long courseId){
