@@ -18,7 +18,8 @@ import stcet.group2020.fpr.model.Attendance;
 import stcet.group2020.fpr.model.Student;
 import stcet.group2020.fpr.repository.AttendanceRepository;
 import stcet.group2020.fpr.repository.StudentCourseRepository;
-import stcet.group2020.fpr.repository.interfaces.StudentReport;
+import stcet.group2020.fpr.repository.interfaces.CourseReport;
+import stcet.group2020.fpr.repository.interfaces.StudentAttendanceByClass;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -36,6 +37,11 @@ public class AttendanceController {
 		return (List<Attendance>) attendanceRepository.findAll();
 	}
 
+	@GetMapping(params = "classId")
+	public List<StudentAttendanceByClass> getAllByClassId(@RequestParam("classId")Long classId){
+		return attendanceRepository.getStudentsByClassId(classId);
+	}
+
 	@GetMapping(params = "courseId")
 	public List<Map<String,Object>> getStudents(@RequestParam("courseId") Long courseId){
 		List<Map<String,Object>> studentsRes = new ArrayList<>();
@@ -49,8 +55,8 @@ public class AttendanceController {
 			studentRes.put("regNo", student.getRegNo());
 			studentRes.put("name", student.getName());
 			//dates::present/absent
-			List<StudentReport> presentList = attendanceRepository.getPresentList(courseId,student.getRegNo());
-			for(StudentReport present: presentList){
+			List<CourseReport> presentList = attendanceRepository.getPresentList(courseId,student.getRegNo());
+			for(CourseReport present: presentList){
 				studentRes.put(present.getDate().format(formatters),present.getPresent()?"P":"A");
 			}
 			studentsRes.add(studentRes);

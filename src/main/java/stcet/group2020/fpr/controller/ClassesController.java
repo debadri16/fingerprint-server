@@ -3,7 +3,9 @@ package stcet.group2020.fpr.controller;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,15 +71,15 @@ public class ClassesController {
 	}
 	
 	@PostMapping
-	public Classes add(@RequestBody Classes classes) {
+	public Map<String,Object> add(@RequestBody Classes classes) {
 		//save class
-		// LocalDate date = LocalDate.now();
-		// classes.setDate(date);
+		LocalDate date = LocalDate.now();
+		classes.setDate(date);
 		Classes classResponse = classesRepository.save(classes);
 		//get all student regNos under classes.courseId
 		List<Student> students = studentCourseRepository.getStudentByCourseId(classResponse.getCourseId());
 
-		List<Attendance> attendances = new ArrayList<>();		
+		List<Attendance> attendances = new ArrayList<>();
 		
 		//form the list of attendance
 		for(Student student: students){
@@ -89,7 +91,12 @@ public class ClassesController {
 		}
 		attendanceRepository.saveAll(attendances);
 
-		return classResponse;
+		Map<String, Object> _class = new HashMap<>();
+		_class.put("classId", classResponse.getClassId());
+		_class.put("courseId", classResponse.getCourseId());
+		DateTimeFormatter formatters = DateTimeFormatter.ofPattern("d/M/uu");
+		_class.put("date",classResponse.getDate().format(formatters));
+		return _class;
 	}
 
 	@DeleteMapping(params = "classId")
