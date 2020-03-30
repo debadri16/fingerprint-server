@@ -6,6 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 @Entity
 public class Admin {
 	
@@ -23,6 +27,10 @@ public class Admin {
     @Length(min=1, max=536)
     private String minutiae;
 
+	@NotNull
+	@JsonProperty(access = Access.WRITE_ONLY)
+	private String password;
+	
     //getter setters
     
     public String getAdminId() {
@@ -57,6 +65,7 @@ public class Admin {
 		this.minutiae = minutiae;
 	}
 
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
@@ -65,7 +74,6 @@ public class Admin {
 		this.password = password;
 	}
 
-	@NotNull
-    private String password;
+	
 
 }
