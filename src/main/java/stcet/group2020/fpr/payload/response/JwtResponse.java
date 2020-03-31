@@ -5,10 +5,14 @@ public class JwtResponse {
 	private String token;
 	private String type = "Bearer";
 	private String id;
+	private String name;
+	private int deptId;
 
-	public JwtResponse(String accessToken, String id) {
+	public JwtResponse(String accessToken, String id, String name, int deptId) {
 		this.token = accessToken;
 		this.id = id;
+		this.name = name;
+		this.deptId = deptId;
 	}
 
 	public String getAccessToken() {
@@ -33,6 +37,22 @@ public class JwtResponse {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getDeptId() {
+		return deptId;
+	}
+
+	public void setDeptId(int deptId) {
+		this.deptId = deptId;
 	}
 
 }

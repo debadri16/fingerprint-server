@@ -62,9 +62,8 @@ public class AdminController {
 
 		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-		
-		return ResponseEntity.ok(new JwtResponse(jwt, 
-												 userDetails.getUsername()));
+		admin = adminRepository.findById(admin.getAdminId()).get();
+		return ResponseEntity.ok(new JwtResponse(jwt,userDetails.getUsername(),admin.getName(),admin.getDeptId()));
 	}
 	
 	@PostMapping("/register")
