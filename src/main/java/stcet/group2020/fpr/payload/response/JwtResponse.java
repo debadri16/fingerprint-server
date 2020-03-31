@@ -4,13 +4,13 @@ package stcet.group2020.fpr.payload.response;
 public class JwtResponse {
 	private String token;
 	private String type = "Bearer";
-	private String id;
+	private String adminId;
 	private String name;
 	private int deptId;
 
-	public JwtResponse(String accessToken, String id, String name, int deptId) {
+	public JwtResponse(String accessToken, String adminId, String name, int deptId) {
 		this.token = accessToken;
-		this.id = id;
+		this.adminId = adminId;
 		this.name = name;
 		this.deptId = deptId;
 	}
@@ -31,12 +31,12 @@ public class JwtResponse {
 		this.type = tokenType;
 	}
 
-	public String getId() {
-		return id;
+	public String getAdminId() {
+		return adminId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setAdminId(String adminId) {
+		this.adminId = adminId;
 	}
 
 	public String getName() {
