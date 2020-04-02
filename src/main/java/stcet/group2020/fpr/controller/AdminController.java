@@ -71,7 +71,7 @@ public class AdminController {
 		if (adminRepository.existsByAdminId(admin.getAdminId())) {
 			return ResponseEntity
 					.badRequest()
-					.body(new MessageResponse("Error: Username is already taken!"));
+					.body(new MessageResponse("Error: Username \"" +admin.getAdminId() + " is already taken!"));
 		}
 
 		admin.setPassword(encoder.encode(admin.getPassword()));
@@ -79,6 +79,6 @@ public class AdminController {
 	
 		adminRepository.save(admin);
 
-		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+		return ResponseEntity.ok(new MessageResponse("Admin " + admin.getName() + " is registered successfully with username \"" + admin.getAdminId() + "\""));
 	}
 }
