@@ -83,6 +83,18 @@ public class Admin {
 
 	public void setRole(String role) {
 		this.role = role;
-	}	
+	}
+
+	public Admin(String adminId,String name,int deptId,String minutiae, String password, String role) {
+		this.adminId = adminId;
+		this.name = name;
+		this.deptId = deptId;
+		this.minutiae = minutiae;
+		this.password = password;
+		this.role = role;
+	}
+
+	public Admin() {
+	};
 
 }

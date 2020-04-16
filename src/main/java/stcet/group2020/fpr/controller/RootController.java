@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -51,6 +53,13 @@ public class RootController {
 	// public List<Admin> getAll() {
 	// 	return (List<Admin>) adminRepository.findAllByRole("ROLE_ROOT");
 	// }
+
+	@EventListener
+    public void appReady(ApplicationReadyEvent event) {
+		String username = "root";
+		String password = "1234";
+		adminRepository.save(new Admin(username, username, 0, "null", encoder.encode(password), "ROLE_ROOT"));
+    }
 	
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody Admin admin) {
