@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -24,6 +25,7 @@ import stcet.group2020.fpr.repository.interfaces.StudentAttendanceByClass;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("attendance")
+@PreAuthorize("hasRole('ROOT') or hasRole('ADMIN')")
 public class AttendanceController {
 	
 	@Autowired
