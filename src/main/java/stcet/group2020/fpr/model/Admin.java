@@ -31,6 +31,9 @@ public class Admin {
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 	
+	@NotNull
+	@JsonIgnore
+	private String role;
     //getter setters
     
     public String getAdminId() {
@@ -74,6 +77,12 @@ public class Admin {
 		this.password = password;
 	}
 
-	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}	
 
 }

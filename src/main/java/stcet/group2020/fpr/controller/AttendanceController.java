@@ -37,11 +37,13 @@ public class AttendanceController {
 		return (List<Attendance>) attendanceRepository.findAll();
 	}
 
+	//short report
 	@GetMapping(params = "classId")
 	public List<StudentAttendanceByClass> getAllByClassId(@RequestParam("classId")Long classId){
 		return attendanceRepository.getStudentsByClassId(classId);
 	}
 
+	//long report
 	@GetMapping(params = "courseId")
 	public List<Map<String,Object>> getStudents(@RequestParam("courseId") Long courseId){
 		List<Map<String,Object>> studentsRes = new ArrayList<>();

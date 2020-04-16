@@ -2,8 +2,10 @@ package stcet.group2020.fpr.security.services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import stcet.group2020.fpr.model.Admin;
@@ -27,7 +29,9 @@ public class UserDetailsImpl implements UserDetails {
 	}
 
 	public static UserDetailsImpl build(Admin admin) {
-		return new UserDetailsImpl(admin.getAdminId(),admin.getPassword(), new ArrayList<>());
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		authorities.add(new SimpleGrantedAuthority(admin.getRole()));		
+		return new UserDetailsImpl(admin.getAdminId(), admin.getPassword(), authorities);
 	}
 
 	@Override

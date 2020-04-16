@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -28,8 +27,8 @@ import stcet.group2020.fpr.security.services.UserDetailsImpl;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("admins")
-public class AdminController {
+@RequestMapping("root")
+public class RootController {
 	
 	@Autowired
 	AuthenticationManager authenticationManager;
@@ -43,17 +42,15 @@ public class AdminController {
 	@Autowired
 	JwtUtils jwtUtils;
 	
-	@GetMapping(params = "id")
-	@PreAuthorize("hasRole('ROOT')")
-	public Optional<Admin> getAdmin(@RequestParam("id") String id) {
-		return adminRepository.findById(id);
-	}
+	// @GetMapping(params = "id")
+	// public Optional<Admin> getRoot(@RequestParam("id") String id) {
+	// 	return adminRepository.findById(id);
+	// }
 	
-	@GetMapping
-	@PreAuthorize("hasRole('ROOT')")
-	public List<Admin> getAll() {
-		return (List<Admin>) adminRepository.findAllByRole("ROLE_ADMIN");
-	}
+	// @GetMapping
+	// public List<Admin> getAll() {
+	// 	return (List<Admin>) adminRepository.findAllByRole("ROLE_ROOT");
+	// }
 	
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody Admin admin) {
@@ -69,19 +66,18 @@ public class AdminController {
 		return ResponseEntity.ok(new JwtResponse(jwt,userDetails.getUsername(),admin.getName(),admin.getDeptId()));
 	}
 	
-	@PostMapping("/register")
-	@PreAuthorize("hasRole('ROOT')")
-	public ResponseEntity<?> add(@RequestBody Admin admin) {
-		if (adminRepository.existsByAdminId(admin.getAdminId())) {
-			return ResponseEntity
-					.badRequest()
-					.body(new MessageResponse("Error: Username is already taken!"));
-		}
+	// @PostMapping("/register")
+	// public ResponseEntity<?> add(@RequestBody Admin admin) {
+	// 	if (adminRepository.existsByAdminId(admin.getAdminId())) {
+	// 		return ResponseEntity
+	// 				.badRequest()
+	// 				.body(new MessageResponse("Error: Username is already taken!"));
+	// 	}
 
-		admin.setPassword(encoder.encode(admin.getPassword()));
-		admin.setRole("ROLE_ADMIN");
-		adminRepository.save(admin);
+	// 	admin.setPassword(encoder.encode(admin.getPassword()));
+	// 	admin.setRole("ROLE_ROOT");
+	// 	adminRepository.save(admin);
 
-		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
-	}
+	// 	return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+	// }
 }
