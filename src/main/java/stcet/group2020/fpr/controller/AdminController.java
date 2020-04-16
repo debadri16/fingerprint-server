@@ -12,14 +12,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import stcet.group2020.fpr.model.Admin;
+import stcet.group2020.fpr.payload.response.AdminCngPass;
 import stcet.group2020.fpr.payload.response.JwtResponse;
 import stcet.group2020.fpr.payload.response.MessageResponse;
 import stcet.group2020.fpr.repository.AdminRepository;
@@ -61,7 +64,8 @@ public class AdminController {
 				new UsernamePasswordAuthenticationToken(admin.getAdminId(), admin.getPassword()));
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-				String jwt = jwtUtils.generateJwtToken(authentication);
+		
+		String jwt = jwtUtils.generateJwtToken(authentication);
 
 		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
@@ -75,13 +79,34 @@ public class AdminController {
 		if (adminRepository.existsByAdminId(admin.getAdminId())) {
 			return ResponseEntity
 					.badRequest()
-					.body(new MessageResponse("Error: Username \"" +admin.getAdminId() + " is already taken!"));
+					.body(new MessageResponse("Error: Id " +admin.getAdminId() + " is already taken!"));
 		}
 
 		admin.setPassword(encoder.encode(admin.getPassword()));
 		admin.setRole("ROLE_ADMIN");
 		adminRepository.save(admin);
 
-		return ResponseEntity.ok(new MessageResponse("Admin " + admin.getName() + " is registered successfully with username \"" + admin.getAdminId() + "\""));
+		return ResponseEntity.ok(new MessageResponse("Admin " + admin.getName() + " is registered successfully with id " + admin.getAdminId() ));
+	}
+
+	@PutMapping("/changePassword")
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<?> changePassword(@RequestBody AdminCngPass admin){
+		authenticationManager.authenticate(
+				new UsernamePasswordAuthenticationToken(admin.getAdminId(), admin.getOldPassword()));
+
+		adminRepository.changePassword(admin.getAdminId(), encoder.encode(admin.getNewPassword()));
+
+		return ResponseEntity.ok(new MessageResponse("Password changed successfully with id: " + admin.getAdminId()));
+	}
+
+	@DeleteMapping("/delete")
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<?> deleteAdmin(@RequestBody Admin admin){
+		authenticationManager.authenticate(
+				new UsernamePasswordAuthenticationToken(admin.getAdminId(), admin.getPassword()));
+
+		adminRepository.deleteByAdminId(admin.getAdminId());
+		return ResponseEntity.ok(new MessageResponse("Admin deleted successfully with id: " + admin.getAdminId()));
 	}
 }
