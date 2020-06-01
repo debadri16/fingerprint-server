@@ -99,7 +99,7 @@ public class AdminController {
 		return ResponseEntity.ok(new MessageResponse("Password changed successfully with id: " + admin.getAdminId()));
 	}
 
-	@DeleteMapping("/delete")
+	@PostMapping("/delete")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> deleteAdmin(@RequestBody Admin admin){
 		authenticationManager.authenticate(
