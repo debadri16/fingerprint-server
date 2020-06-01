@@ -67,7 +67,7 @@ public class ClassesController {
 		List<String> dates = new ArrayList<>();
 		DateTimeFormatter formatters = DateTimeFormatter.ofPattern("d/M/uu");
 		for(Classes _class: classes){
-			dates.add(_class.getDate().format(formatters));
+			dates.add(_class.getDate().format(formatters)+"-"+_class.getClassId());
 		}
 		return dates;
 	}
