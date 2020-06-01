@@ -61,7 +61,7 @@ public class AttendanceController {
 			//dates::present/absent
 			List<CourseReport> presentList = attendanceRepository.getPresentList(courseId,student.getRegNo());
 			for(CourseReport present: presentList){
-				studentRes.put(present.getDate().format(formatters),present.getPresent()?"P":"A");
+				studentRes.put(present.getDate().format(formatters)+" - "+present.getClassId(),present.getPresent()?"P":"A");
 			}
 			studentsRes.add(studentRes);
 		}
