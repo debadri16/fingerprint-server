@@ -53,7 +53,6 @@ public class AdminController {
 	}
 	
 	@GetMapping
-	@PreAuthorize("hasRole('ROOT')")
 	public List<Admin> getAll() {
 		return (List<Admin>) adminRepository.findAllByRole("ROLE_ADMIN");
 	}
