@@ -107,4 +107,11 @@ public class AdminController {
 		adminRepository.deleteByAdminId(admin.getAdminId());
 		return ResponseEntity.ok(new MessageResponse("Admin deleted successfully with id: " + admin.getAdminId()));
 	}
+
+	@PostMapping("/deleteById")
+	@PreAuthorize("hasRole('ROOT')")
+	public ResponseEntity<?> deleteAdminById(@RequestBody Admin admin){
+		adminRepository.deleteByAdminId(admin.getAdminId());
+		return ResponseEntity.ok(new MessageResponse("Admin deleted successfully with id: " + admin.getAdminId()));
+	}
 }
