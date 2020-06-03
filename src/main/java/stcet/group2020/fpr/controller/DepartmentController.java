@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,5 +39,11 @@ public class DepartmentController {
 	@PostMapping
 	public Department add(@RequestBody Department department) {
 		return departmentRepository.save(department);
+	}
+
+	//debadri 3 jun 20
+	@DeleteMapping(params = "deptId")
+	public void deleteDepartment(@RequestParam("deptId") int deptId) {
+		departmentRepository.deleteById(deptId);
 	}
 }

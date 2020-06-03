@@ -65,9 +65,24 @@ public class ClassesController {
 	public List<String> getDatesByCourseId(@RequestParam("courseId") Long courseId){
 		List<Classes> classes = classesRepository.findByCourseIdOrderByDate(courseId);
 		List<String> dates = new ArrayList<>();
+
+		//debadri 3 jun 2020
+		Map<String, Integer> dateCount = new HashMap<>();
+
 		DateTimeFormatter formatters = DateTimeFormatter.ofPattern("d/M/uu");
 		for(Classes _class: classes){
-			dates.add(_class.getDate().format(formatters)+"-"+_class.getClassId());
+			//debadri 3 jun 20
+			String tmpDate = _class.getDate().format(formatters);
+			if(dateCount.get(tmpDate) == null){
+				dateCount.put(tmpDate, 1);
+			}
+			else{
+				dateCount.put(tmpDate, dateCount.get(tmpDate)+1);
+			}
+			if(dateCount.get(tmpDate) == 1)
+				dates.add(tmpDate);
+			else
+				dates.add(tmpDate+"-"+dateCount.get(tmpDate));
 		}
 		return dates;
 	}

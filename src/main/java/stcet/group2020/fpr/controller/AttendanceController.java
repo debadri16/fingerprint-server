@@ -58,10 +58,25 @@ public class AttendanceController {
 			Map<String, Object> studentRes = new HashMap<>();
 			studentRes.put("regNo", student.getRegNo());
 			studentRes.put("name", student.getName());
+
+			//debadri 3 jun 2020
+			Map<String, Integer> dateCount = new HashMap<>();
+
 			//dates::present/absent
 			List<CourseReport> presentList = attendanceRepository.getPresentList(courseId,student.getRegNo());
 			for(CourseReport present: presentList){
-				studentRes.put(present.getDate().format(formatters)+"-"+present.getClassId(),present.getPresent()?"P":"A");
+				//debadri 3 jun 2020
+				String tmpDate = present.getDate().format(formatters);
+				if(dateCount.get(tmpDate) == null){
+					dateCount.put(tmpDate, 1);
+				}
+				else{
+					dateCount.put(tmpDate, dateCount.get(tmpDate)+1);
+				}
+				if(dateCount.get(tmpDate) == 1)
+					studentRes.put(tmpDate,present.getPresent()?"P":"A");
+				else
+					studentRes.put(tmpDate+"-"+dateCount.get(tmpDate),present.getPresent()?"P":"A");
 			}
 			studentsRes.add(studentRes);
 		}
