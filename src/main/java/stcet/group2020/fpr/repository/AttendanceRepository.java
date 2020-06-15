@@ -19,7 +19,7 @@ public interface AttendanceRepository extends CrudRepository<Attendance, Long> {
     @Query("UPDATE Attendance a SET a.present = true WHERE a.regNo = ?1 AND a.classId = ?2")
     int addAttendance(@Param("regNo") String regNo, @Param("classId") long classId);
     
-    @Query("SELECT c.date as date,c.classId as classId, a.present as present FROM Attendance a, Classes c WHERE c.courseId = ?1 AND a.classId = c.classId AND a.regNo = ?2")
+    @Query(value = "SELECT x.date as date, y.present as present FROM (SELECT a.reg_no, c.class_id, c.date FROM student_course as a, classes as c WHERE c.course_id = a.course_id AND a.course_id = ?1 AND a.reg_no = ?2) as x LEFT JOIN attendance as y ON x.reg_no = y.reg_no AND x.class_id = y.class_id", nativeQuery = true)
     public List<CourseReport> getPresentList(Long courseId, String regNo);
     
     @Query("SELECT a.regNo as regNo, s.name as name, a.present as present FROM Attendance a, Student s WHERE a.classId = ?1 AND a.regNo = s.regNo")

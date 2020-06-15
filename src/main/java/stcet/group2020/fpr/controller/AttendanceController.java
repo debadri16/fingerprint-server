@@ -66,17 +66,31 @@ public class AttendanceController {
 			List<CourseReport> presentList = attendanceRepository.getPresentList(courseId,student.getRegNo());
 			for(CourseReport present: presentList){
 				//debadri 3 jun 2020
+				//modified 15 jun 2020
+
+				//present
 				String tmpDate = present.getDate().format(formatters);
+				String p;
+				if(present.getPresent() == null)
+					p = "NA";
+				else if(present.getPresent() == true)
+					p = "P";
+				else
+					p = "A";
+
 				if(dateCount.get(tmpDate) == null){
 					dateCount.put(tmpDate, 1);
 				}
 				else{
 					dateCount.put(tmpDate, dateCount.get(tmpDate)+1);
 				}
-				if(dateCount.get(tmpDate) == 1)
-					studentRes.put(tmpDate,present.getPresent()?"P":"A");
-				else
-					studentRes.put(tmpDate+"-"+dateCount.get(tmpDate),present.getPresent()?"P":"A");
+				if(dateCount.get(tmpDate) == 1){
+					
+					studentRes.put(tmpDate,p);
+				}
+				else{
+					studentRes.put(tmpDate+"-"+dateCount.get(tmpDate),p);
+				}
 			}
 			studentsRes.add(studentRes);
 		}
